@@ -22,7 +22,7 @@
 ---
 
 ### 📚 Biblioteca de Projetos
-Atualmente, minha biblioteca conta com diversos projetos que variam de automações a sistemas personalizados. Você pode explorar todos os códigos fonte no link abaixo:
+Atualmente, minha biblioteca conta com poucos projetos personalizados. Você pode explorar todos os códigos fonte no link abaixo:
 
 <br>
 
