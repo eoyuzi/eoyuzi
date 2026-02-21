@@ -1,10 +1,10 @@
 <div align="center">
   <br>
 
-  <img src="https://github.com/eoyuzi.png" width="130px" style="border-radius: 50%; border: 2px solid #fff; filter: grayscale(1);" />
+  <img src="https://github.com/eoYuzi.png" width="130px" style="border-radius: 50%; border: 2px solid #fff; filter: grayscale(1);" />
 
   <h1>
-    <img src="https://readme-typing-svg.herokuapp.com/?font=Inter&weight=800&size=36&center=true&vCenter=true&width=800&height=70&duration=4000&lines=Olá,+eu+sou+o+YurCop;Developer+&+Designer&color=FFFFFF" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com/?font=Inter&weight=800&size=36&center=true&vCenter=true&width=800&height=70&duration=4000&lines=Olá,+eu+sou+o+eoYuzi;Developer+&+Designer&color=FFFFFF" alt="Typing SVG" />
   </h1>
 
   <p><i>"Transformando ideias em soluções digitais inovadoras."</i></p>
@@ -27,7 +27,7 @@ Atualmente, minha biblioteca conta com poucos projetos personalizados. Você pod
 <br>
 
 <div align="center">
-  <a href="https://github.com/YurCop?tab=repositories">
+  <a href="https://github.com/eoYuzi?tab=repositories">
     <img src="https://img.shields.io/badge/ACESSAR%20REPOSITÓRIOS-000000?style=for-the-badge&logo=github&logoColor=white&border=white" alt="Repositórios" height="45">
   </a>
 </div>
@@ -37,9 +37,9 @@ Atualmente, minha biblioteca conta com poucos projetos personalizados. Você pod
 ---
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=YurCop&show_icons=true&theme=dark&hide_border=true&title_color=ffffff&text_color=ffffff&icon_color=ffffff&bg_color=050505" height="150" alt="Estatísticas do GitHub" />
+  <img src="https://github-readme-stats.vercel.app/api?username=eoYuzi&show_icons=true&theme=dark&hide_border=true&title_color=ffffff&text_color=ffffff&icon_color=ffffff&bg_color=050505" height="150" alt="Estatísticas do GitHub" />
   
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YurCop&layout=compact&theme=dark&hide_border=true&title_color=ffffff&text_color=ffffff&bg_color=050505" height="150" alt="Linguagens mais usadas" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=eoYuzi&layout=compact&theme=dark&hide_border=true&title_color=ffffff&text_color=ffffff&bg_color=050505" height="150" alt="Linguagens mais usadas" />
 </div>
 
 <br>
