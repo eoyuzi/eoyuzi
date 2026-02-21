@@ -1,7 +1,7 @@
 <div align="center">
   <br>
 
-  <img src="https://github.com/YurCop.png" width="130px" style="border-radius: 50%; border: 2px solid #fff; filter: grayscale(1);" />
+  <img src="https://github.com/eoyuzi.png" width="130px" style="border-radius: 50%; border: 2px solid #fff; filter: grayscale(1);" />
 
   <h1>
     <img src="https://readme-typing-svg.herokuapp.com/?font=Inter&weight=800&size=36&center=true&vCenter=true&width=800&height=70&duration=4000&lines=Olá,+eu+sou+o+YurCop;Developer+&+Designer&color=FFFFFF" alt="Typing SVG" />
