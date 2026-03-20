@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="--bg-color: 10, 10, 10; --main-color: #c0c0c0; --accent: #ffffff;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eoYuzi // Terminal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: rgb(var(--bg-color));
+            background: #0a0a0a;
+            color: var(--main-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            border: 2px solid var(--main-color);
+            padding: 30px;
+            background: #0f0f0f;
+            position: relative;
+            box-shadow: 10px 10px 0px var(--main-color);
+        }
+
+        header {
+            border-bottom: 2px dashed var(--main-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ascii-art {
+            font-size: 8px;
+            line-height: 1;
+            white-space: pre;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .user-data h1 {
+            font-size: 24px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .status-tag {
+            background: var(--main-color);
+            color: #000;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .box {
+            border: 1px solid var(--main-color);
+            padding: 15px;
+            position: relative;
+        }
+
+        .box-title {
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            background: #0f0f0f;
+            padding: 0 5px;
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .tech-item {
+            font-size: 13px;
+            border: 1px solid #333;
+            padding: 4px 8px;
+        }
+
+        .tech-item:hover {
+            background: var(--main-color);
+            color: #000;
+        }
+
+        .btn-group {
+            grid-column: span 2;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border: 1px solid var(--main-color);
+            text-decoration: none;
+            color: var(--main-color);
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--main-color);
+            color: #000;
+            box-shadow: 4px 4px 0 var(--accent);
+            transform: translate(-2px, -2px);
+        }
+
+        .player {
+            margin-top: 20px;
+            border: 1px solid var(--main-color);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 20px;
+        }
+
+        .bar {
+            width: 4px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        #playBtn {
+            background: none;
+            border: 1px solid var(--main-color);
+            color: var(--main-color);
+            cursor: pointer;
+            padding: 5px 15px;
+        }
+
+        #playBtn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .load-bar-container {
+            width: 300px;
+            border: 1px solid var(--main-color);
+            height: 20px;
+            margin-top: 10px;
+            padding: 2px;
+        }
+
+        #load-bar {
+            height: 100%;
+            background: var(--main-color);
+            width: 0%;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .btn-group { grid-column: span 1; flex-direction: column; }
+            .ascii-art { font-size: 4px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loader">
+        <pre style="font-size: 10px;">LOADING SYSTEM...</pre>
+        <div class="load-bar-container">
+            <div id="load-bar"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <pre class="ascii-art">
+  ___  _____   ____  _  _______   
+ | __|/ _ \ \ / / / / |_  /_ _|
+ | _| | (_) \ V / /_/ / / / | | 
+ |___|\___/  |_| \___/ /___|___|
+            </pre>
+            <div class="profile-info">
+                <div class="user-data">
+                    <h1>eoYuzi@Dev:~$</h1>
+                    <div class="status-tag">STATUS: IDLE</div>
+                </div>
+                <div style="text-align: right;">
+                    <div id="time">00:00:00</div>
+                    <div id="date" style="font-size: 10px; opacity: 0.6;">MAR 20, 2026</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="box">
+                <span class="box-title">About_Me</span>
+                <p style="font-size: 14px; line-height: 1.6;">
+                    > Developer & Designer<br>
+                    > Focado em interfaces minimalistas e sistemas de alta performance.<br>
+                    > Entusiasta de estética Retro-Futurista.
+                </p>
+            </div>
+
+            <div class="box">
+                <span class="box-title">Stack_Trace</span>
+                <ul class="tech-list">
+                    <li class="tech-item">HTML/CSS</li>
+                    <li class="tech-item">JS</li>
+                    <li class="tech-item">C#</li>
+                    <li class="tech-item">NODE.JS</li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://github.com/eoYuzi" target="_blank" class="btn">[ GITHUB ]</a>
+                <a href="#" class="btn">[ DISCORD ]</a>
+            </div>
+        </div>
+
+        <div class="player">
+            <button id="playBtn">PLAY</button>
+            <div style="flex: 1;">
+                <div id="trackName" style="font-size: 12px; white-space: nowrap; overflow: hidden;">PLAYLIST.MP3</div>
+                <div class="visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio" crossorigin="anonymous"></audio>
+
+    <script>
+const playlists = [
+    {
+        name: "Metro-Boomin-Heroes",
+        path: "musics/Metro-Boomin-Heroes.ogg",
+        timestamps: [
+            { time: 0, title: "Around Me - Metro Boomin, Don Toliver" },
+            { time: 182, title: "Transition" },
+            { time: 190, title: "Superhero - Metro Boomin, Future" },
+            { time: 309, title: "Trance - Metro Boomin, Travis Scott" },
+            { time: 484, title: "Lock On Me - Metro Boomin, Travis Scott" },
+            { time: 644, title: "Transition" },
+            { time: 654, title: "Too Many Nights - Metro Boomin, Future" },
+            { time: 774, title: "The Magic Piano" },
+            { time: 817, title: "Transition" },
+            { time: 840, title: "Niagara Falls - Metro Boomin, Travis Scott" }
+        ]
+    },
+    {
+        name: "Miles-Morales-Playlist",
+        path: "musics/Miles-Morales-Playlist.ogg",
+        timestamps: [
+            { time: 0, title: "Sunflower - Post Malone, Swae Lee" },
+            { time: 156, title: "Hey Ya! - Outkast" },
+            { time: 386, title: "Blitzkrieg Bop - Ramones" },
+            { time: 483, title: "Blinding Lights - The Weeknd" },
+            { time: 677, title: "See You Again - Tyler, The Creator" },
+            { time: 814, title: "Where This Flower Blooms" },
+            { time: 875, title: "Teeth - 5SOS" }
+        ]
+    }
+];
+
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('playBtn');
+const bars = document.querySelectorAll('.bar');
+let audioCtx, analyser, dataArray, bassFilter;
+let currentPlaylistIndex = Math.floor(Math.random() * playlists.length); 
+
+setInterval(() => {
+    const now = new Date();
+    const timeEl = document.getElementById('time');
+    if(timeEl) timeEl.textContent = now.toLocaleTimeString('pt-BR');
+}, 1000);
+
+function initAudio() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(audio);
+    
+    bassFilter = audioCtx.createBiquadFilter();
+    bassFilter.type = "lowshelf";
+    bassFilter.frequency.value = 150; // Frequência um pouco mais alta para clareza
+    bassFilter.gain.value = 6;       // Reduzido de 12 para 6 (mais suave e limpo)
+    
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 64;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    source.connect(bassFilter).connect(analyser).connect(audioCtx.destination);
+    renderFrame();
+}
+
+function renderFrame() {
+    requestAnimationFrame(renderFrame);
+    if (!analyser) return;
+    
+    analyser.getByteFrequencyData(dataArray);
+    
+    bars.forEach((bar, i) => {
+        let targetHeight = (dataArray[i] / 255) * 18; 
+        
+        if (targetHeight > 20) targetHeight = 20;
+        if (targetHeight < 2) targetHeight = 2;
+        
+        bar.style.height = targetHeight + 'px';
+    });
+}
+
+function togglePlay() {
+    initAudio();
+    if (audio.paused) {
+        if (!audio.src) loadPlaylist(currentPlaylistIndex);
+        audio.play();
+        playBtn.textContent = "STOP";
+    } else {
+        audio.pause();
+        playBtn.textContent = "PLAY";
+    }
+}
+
+function loadPlaylist(index) {
+    const p = playlists[index];
+    audio.src = p.path;
+}
+
+playBtn.addEventListener('click', togglePlay);
+
+audio.ontimeupdate = () => {
+    const p = playlists[currentPlaylistIndex];
+    const currentTime = audio.currentTime;
+    
+    const currentSong = [...p.timestamps].reverse().find(s => currentTime >= s.time);
+    
+    const trackDisplay = document.getElementById('trackName'); 
+    if (trackDisplay && currentSong) {
+        trackDisplay.textContent = currentSong.title;
+    }
+};
+
+window.addEventListener('load', () => {
+    const bar = document.getElementById('load-bar');
+    let p = 0;
+    const int = setInterval(() => {
+        p += Math.random() * 15;
+        if (p > 100) p = 100;
+        if(bar) bar.style.width = p + '%';
+        
+        if (p === 100) {
+            clearInterval(int);
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) loader.style.display = 'none';
+                loadPlaylist(currentPlaylistIndex);
+            }, 500);
+        }
+    }, 60);
+});
+
+document.addEventListener('click', () => {
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}, { once: true });
+    </script>
+</body>
+</html>
