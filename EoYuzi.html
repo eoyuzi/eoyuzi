@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="--bg-color: 10, 10, 10; --main-color: #c0c0c0; --accent: #ffffff;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA DE ACESSO // eoYuzi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Fira Code', monospace; }
+
+        body {
+            background: #0a0a0a;
+            color: var(--main-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .loader-container {
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid var(--main-color);
+            padding: 40px;
+            background: #0f0f0f;
+            box-shadow: 10px 10px 0px var(--main-color);
+            position: relative;
+        }
+
+        .status-text {
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .progress-box {
+            width: 100%;
+            border: 1px solid var(--main-color);
+            height: 30px;
+            padding: 4px;
+            margin-bottom: 30px;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .tips-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border-left: 3px solid var(--accent);
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tips-header {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        #tip-content {
+            font-size: 11px;
+            line-height: 1.5;
+            color: #888;
+        }
+
+        .loading-animation::after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80% { content: '...'; } }
+    </style>
+</head>
+<body>
+
+    <div class="loader-container">
+        <div class="status-text">Iniciando Protocolo <span class="loading-animation"></span></div>
+        <div class="progress-box">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="loading-detail" style="font-size: 10px; opacity: 0.5;">Carregando módulos de sistema...</div>
+    </div>
+
+    <div class="tips-panel">
+        <div class="tips-header">> [PRO-TIP]</div>
+        <div id="tip-content">Sincronizando banco de dados de conhecimento...</div>
+    </div>
+
+    <script>
+        const paginas = [
+            'home/perfil!.html', 
+            'home/perfil&.html'
+        ];
+
+        const dicas = [
+            "Use 'const' por padrão. Só use 'let' se a variável realmente for mudar.",
+            "Comente o 'PORQUÊ' algo foi feito, não o 'QUÊ' foi feito.",
+            "DRY: Don't Repeat Yourself. Se copiou o código 3 vezes, crie uma função.",
+            "Console.log é bom, mas aprender a usar o Debugger do Chrome é melhor.",
+            "Escreva código para humanos lerem, não apenas para máquinas executarem.",
+            "O melhor código é aquele que você consegue apagar sem quebrar o resto.",
+            "Antes de otimizar a velocidade, certifique-se que o código funciona corretamente.",
+            "Git commit frequentemente. Mensagens claras salvam vidas."
+        ];
+
+        window.addEventListener('load', () => {
+            const bar = document.getElementById('progress-bar');
+            const detail = document.getElementById('loading-detail');
+            const tipBox = document.getElementById('tip-content');
+            
+            tipBox.textContent = dicas[Math.floor(Math.random() * dicas.length)];
+
+            let progress = 0;
+            const targetPage = paginas[Math.floor(Math.random() * paginas.length)];
+
+            const interval = setInterval(() => {
+                progress += Math.random() * 8;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    detail.textContent = "CONEXÃO ESTABELECIDA. REDIRECIONANDO...";
+                    
+                    setTimeout(() => {
+                        window.location.replace(targetPage);
+                    }, 800);
+                }
+
+                bar.style.width = progress + '%';
+
+                if(progress > 30 && progress < 60) detail.textContent = "Injetando scripts de áudio (Bass Boost: ON)...";
+                if(progress > 60 && progress < 90) detail.textContent = "Sincronizando playlists do Spotify...";
+                if(progress > 90) detail.textContent = "Finalizando renderização CRT...";
+                
+            }, 150);
+        });
+    </script>
+</body>
+</html>
