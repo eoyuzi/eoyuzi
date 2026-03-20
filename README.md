@@ -1,4 +1,4 @@
-# <p align="center"> 🖥️ eoYuzi@Terminal:~$ </p>
+# <p align="center"> eoYuzi@Terminal:~$ </p>
 
 <div align="center">
   <br>
