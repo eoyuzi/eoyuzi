@@ -58,7 +58,6 @@
 ---
 
 <div align="center">
-  <code>Disponível para cursos e oportunidades profissionais</code>
   <br>
   <img src="https://img.shields.io/badge/STATUS-ACTIVE-success?style=flat-square&color=00FF00" />
 </div>
