@@ -1,4 +1,3 @@
-# <p align="center"> eoYuzi@Terminal:~$ </p>
 
 <div align="center">
   <br>
